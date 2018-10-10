@@ -7,6 +7,7 @@ ruby, 7zip, msys2/mingw system
 $cd      = $pwd
 $path    = $env:path
 $src     = $env:BUILD_SOURCESDIRECTORY
+$root    = [System.IO.Path]::GetFullPath("$src\..")
 $drv     = (get-location).Drive.Name + ":"
 $root    = [System.IO.Path]::GetFullPath("$src\..")
 $dl_path = "$root\prereq"
@@ -56,7 +57,6 @@ $file      = "msys2-base-x86_64-20180531.tar"
 $msys2_uri = "http://repo.msys2.org/distrib/x86_64"
 
 $dir1 = "-o$dl_path"
-$dir2 = "-o$drv\msys64"
 
 Write-Host "Downloading $file"
 $fp = "$dl_path\$file" + ".xz"
@@ -65,11 +65,11 @@ $wc.DownloadFile($uri, $fp)
 Write-Host "Processing $file"
 7z.exe x $fp $dir1 1> $null
 $fp = "$dl_path/$file"
-$dir2 = "-o$drv"
+$dir2 = "-o$root"
 7z.exe x $fp $dir2 1> $null
 Remove-Item $dl_path\*.*
 
-$env:path =  "$drv\ruby\bin;$drv\msys64\usr\bin;$drv\git\cmd;$env:path"
+$env:path =  "$drv\ruby\bin;$root\msys64\usr\bin;$drv\git\cmd;$env:path"
 
 if ($env:PLATFORM -eq 'x64') {
   $march = "x86-64" ; $carch = "x86_64" ; $rarch = "x64-mingw32"  ; $mingw = "mingw64"

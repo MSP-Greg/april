@@ -31,7 +31,8 @@ function Set-Variables {
   } elseif ($env:AZURE_HTTP_USER_AGENT) {
     $script:is_av     =  $false
     $script:d_repo    =  $env:BUILD_SOURCESDIRECTORY.replace('\', '/')
-    $script:d_msys2   =  "D:/msys64"
+    $root             = [System.IO.Path]::GetFullPath("$d_repo\..")
+    $script:d_msys2   =  "$root/msys64".replace('\', '/')
     $script:d_git     =  "$env:ProgramFiles/Git"
     $script:7z        =  "D:/7zip/7z.exe"
     $script:base_path = ("D:/7zip;$d_git/cmd;" + `
