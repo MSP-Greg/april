@@ -124,13 +124,13 @@ function Finish {
   if ($exit) { exit 1 }
 }
 
-#—————————————————————————————————————————————————————————————————————
+#————————————————————————————————————————————————————————————————————— BasicTest
 function BasicTest {
   $env:path = "$d_install/bin;$base_path"
   # needs miniruby at root (build)
   $env:RUBY = $ruby_exe
   Run-Proc `
-    -exe    "ruby.exe" `
+    -exe    $ruby_exe `
     -e_args "-rdevkit --disable-gems ../ruby/basictest/runner.rb" `
     -StdOut "test_basic.log" `
     -StdErr "test_basic_err.log" `
@@ -189,7 +189,7 @@ function MSpec {
   $env:path = "$d_install/bin;$d_repo/git/cmd;$base_path"
 
   Run-Proc `
-    -exe    "ruby.exe" `
+    -exe    $ruby_exe `
     -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -j -V -T `"--disable=gems`"" `
     -StdOut "test_mspec.log" `
     -StdErr "test_mspec_err.log" `

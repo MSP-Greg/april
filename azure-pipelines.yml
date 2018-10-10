@@ -25,6 +25,6 @@ jobs:
         failOnStderr: false
         displayName: $(System.JobName) config, build, and install
 
-      - powershell: ./2_0_test.ps1
-        failOnStderr: false
+      - powershell: $env:path = ./2_0_test.ps1
+        failOnStderr: true
         displayName: $(System.JobName) test

@@ -20,8 +20,9 @@ function Remove-Read-Only($path) {
 # set base variables, including MSYS2 location and bit related varis
 function Set-Variables {
   if ($env:Appveyor -eq 'True') {
-    $script:is_av     = $true
-    $script:d_msys2   = "C:/msys64"
+    $script:is_av     =  $true
+    $script:d_repo    =  $PSScriptRoot.replace('\', '/')
+    $script:d_msys2   =  "C:/msys64"
     $script:d_git     =  "$env:ProgramFiles/Git"
     $script:7z        =  "$env:ProgramFiles/7-Zip/7z.exe"
     $script:base_path = ("$env:ProgramFiles/7-Zip;" + `
@@ -29,10 +30,11 @@ function Set-Variables {
       "$env:SystemRoot/system32;$env:ProgramFiles;$env:SystemRoot").replace('\', '/')
   } elseif ($env:AZURE_HTTP_USER_AGENT) {
     $script:is_av     =  $false
+    $script:d_repo    =  $env:BUILD_SOURCESDIRECTORY.replace('\', '/')
     $script:d_msys2   =  "D:/msys64"
     $script:d_git     =  "$env:ProgramFiles/Git"
-    $script:7z        =  "D:/7Zip/7z.exe"
-    $script:base_path = ("D:/7Zip;$d_git/cmd;" + `
+    $script:7z        =  "D:/7zip/7z.exe"
+    $script:base_path = ("D:/7zip;$d_git/cmd;" + `
       "$env:SystemRoot/system32;$env:SystemRoot;$env:SystemRoot\System32\wbem").replace('\', '/')
   } else {
     ./local.ps1
