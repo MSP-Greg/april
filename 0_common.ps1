@@ -81,7 +81,7 @@ function Set-Variables {
 
   $script:jobs = $env:NUMBER_OF_PROCESSORS
   $script:fc   = "Yellow"
-  $script:dash = "$([char]0x2015)"
+  $script:dash = "-"    # "$([char]0x2015)"
   $script:dl   = $($dash * 80)
 
   # assumes symlink folder exists, some tools may not be happy with a space in
