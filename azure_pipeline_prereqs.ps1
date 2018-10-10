@@ -7,7 +7,6 @@ ruby, 7zip, msys2/mingw system
 $cd      = $pwd
 $path    = $env:path
 $src     = $env:BUILD_SOURCESDIRECTORY
-$root    = [System.IO.Path]::GetFullPath("$src\..")
 $drv     = (get-location).Drive.Name + ":"
 $root    = [System.IO.Path]::GetFullPath("$src\..")
 $dl_path = "$root\prereq"
