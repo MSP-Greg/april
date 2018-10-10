@@ -257,7 +257,10 @@ Time-Log "$make -j$jobs update-unicode, $make -j$jobs update-gems"
 Remove-Read-Only $d_ruby
 Remove-Read-Only $d_build
 
+$eap = $ErrorActionPreference
+$ErrorActionPreference = 'continue'
 Run "$make -j$jobs 2>&1" $true
+$ErrorActionPreference = $eap
 Time-Log "$make -j$jobs"
 
 # Run "$make -f GNUMakefile DESTDIR=$d_repo_u install-nodoc"
