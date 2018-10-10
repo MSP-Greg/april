@@ -39,7 +39,7 @@ function Print-Time-Log {
 }
 
 #—————————————————————————————————————————————————————————————————————— Time-Log
-function Time-Log($msg) { 
+function Time-Log($msg) {
   if ($script:time_old) {
     $time_new = Get-Date
     $diff = New-TimeSpan -Start $time_old -End $time_new

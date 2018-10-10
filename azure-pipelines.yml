@@ -1,26 +1,5 @@
-variables:          # build variables are set in azure_pipeline_prereqs_*.ps1
-  BASERUBY:         # full path to ruby.exe
-  BUILD:            # path to build folder, child of SRC for vc, sibling of SRC for mingw
-  BUILD_PATH:       # env PATH string for building (contains pre-installed Ruby)
-  GIT:              # full path to git.exe, uses 'no space' link
-  INSTALL:          # path to main install folder (not bin)
-  JOBS:             # NUMBER_OF_PROCESSORS
-  SRC:              # source/repo full path
-  SRC_D:            # source/repo directory name
-  TEST_PATH:        # env PATH string with no pre-installed Ruby
-  TMPDIR:           # tmp folder on SRC drive slash
-  TMPDIR_W:         # tmp folder on SRC drive backslash
-
 jobs:
   - job: Ruby_mingw
-    variables:      # Build variables are set in azure_pipeline_prereqs_mingw.ps1
-      CHOST:        # x86_64-w64-mingw32 or i686-w64-mingw32
-      MARCH:        # x86-64 or i686
-      MSYSTEM:      # MINGW64 or MINGW32
-      MSYSTEM_CARCH: # this and below are used in makepkg, not sure if all needed
-      MSYSTEM_CHOST:
-      CARCH:
-      MINGW_PREFIX:
     timeoutInMinutes: 60
     pool:
       vmImage: vs2015-win2012r2
@@ -41,10 +20,11 @@ jobs:
           git clone -q --depth=5 --no-tags --branch=master https://github.com/ConnorAtherton/rb-readline.git ./ruby_readline
           git clone -q --depth=5 --no-tags --branch=trunk  https://github.com/ruby/ruby.git                  ./ruby
         displayName: $(System.JobName) install ruby, ri2, rb-readline
-        
-      - powershell: ./1_0_build_install_64.ps1
+
+      - powershell: $env:path = "D:\ruby\bin;$env:path" ; ./1_0_build_install_64.ps1
+        failOnStderr: false
         displayName: $(System.JobName) config, build, and install
 
       - powershell: ./2_0_test.ps1
+        failOnStderr: false
         displayName: $(System.JobName) test
- 

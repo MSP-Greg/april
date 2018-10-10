@@ -27,7 +27,7 @@ function Set-Variables {
     $script:base_path = ("$env:ProgramFiles/7-Zip;" + `
       "$env:ProgramFiles/AppVeyor/BuildAgent;$d_git/cmd;" + `
       "$env:SystemRoot/system32;$env:ProgramFiles;$env:SystemRoot").replace('\', '/')
-  } elseif (true) {
+  } elseif (1) {
     $script:is_av     =  $true
     $script:d_msys2   =  "D:/msys64"
     $script:d_git     =  "$env:ProgramFiles/Git"
