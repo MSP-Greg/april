@@ -26,7 +26,8 @@ jobs:
         displayName: $(System.JobName) config, build, and install
 
       - powershell: $env:path = ./2_0_test.ps1
-        failOnStderr: true
+        failOnStderr: false
+        continueOnError: true
         displayName: $(System.JobName) test
 
       - task: PublishBuildArtifacts@1
