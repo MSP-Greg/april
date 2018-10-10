@@ -34,7 +34,7 @@ function Kill-Proc($proc) {
   foreach ($process in $r_processes) {
     $id = $process.ProcessId
     if (!$process.HasExited) {
-      Stop-Process -Id $id -Force
+      Stop-Process -Id $id -Force -ErrorAction SilentlyContinue
       sleep (0.1)
     }
   }
@@ -181,7 +181,7 @@ function Test-All {
     -StdErr "test_all_err.log" `
     -Title  "test-all" `
     -Dir    "$d_ruby/test" `
-    -TimeLimit 1500
+    -TimeLimit 1800
 
   Remove-Item -Path "$d_install/lib/ruby/$abi/$rarch/-test-" -Recurse
 }
@@ -197,7 +197,7 @@ function MSpec {
     -StdErr "test_mspec_err.log" `
     -Title  "test-mspec" `
     -Dir    "$d_ruby/spec/ruby" `
-    -TimeLimit 240
+    -TimeLimit 300
 }
 
 #————————————————————————————————————————————————————————————————————————— setup
