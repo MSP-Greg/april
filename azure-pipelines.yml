@@ -28,3 +28,10 @@ jobs:
       - powershell: $env:path = ./2_0_test.ps1
         failOnStderr: true
         displayName: $(System.JobName) test
+
+      - task: PublishBuildArtifacts@1
+        displayName: Publish logs
+        continueOnError: true
+        inputs:
+          pathtoPublish: $(Build.SourcesDirectory)/logs
+          artifactName: mingw-logs
