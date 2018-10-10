@@ -65,11 +65,11 @@ $wc.DownloadFile($uri, $fp)
 Write-Host "Processing $file"
 7z.exe x $fp $dir1 1> $null
 $fp = "$dl_path/$file"
-$dir2 = "-o$root"
+$dir2 = "-o$src"
 7z.exe x $fp $dir2 1> $null
 Remove-Item $dl_path\*.*
 
-$env:path =  "$drv\ruby\bin;$root\msys64\usr\bin;$drv\git\cmd;$env:path"
+$env:path =  "$drv\ruby\bin;$src\msys64\usr\bin;$drv\git\cmd;$env:path"
 
 if ($env:PLATFORM -eq 'x64') {
   $march = "x86-64" ; $carch = "x86_64" ; $rarch = "x64-mingw32"  ; $mingw = "mingw64"
