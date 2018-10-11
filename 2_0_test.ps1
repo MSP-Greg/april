@@ -190,9 +190,11 @@ function Test-All {
 function MSpec {
   $env:path = "$d_install/bin;$d_repo/git/cmd;$base_path"
 
+#   -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -j -V -T `"--disable=gems`"" `
+  
   Run-Proc `
     -exe    $ruby_exe `
-    -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -j -V -T `"--disable=gems`"" `
+    -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -V -f f -T `"--disable=gems`"" `
     -StdOut "test_mspec.log" `
     -StdErr "test_mspec_err.log" `
     -Title  "test-mspec" `
@@ -224,8 +226,8 @@ BasicTest
 sleep 2
 BootStrapTest
 sleep 2
-Test-All
-sleep 5
+#Test-All
+#sleep 5
 MSpec
 
 ren "$d_install/lib/ruby/site_ruby/readline.rb_" "readline.rb"
