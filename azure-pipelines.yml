@@ -25,7 +25,9 @@ jobs:
         failOnStderr: false
         displayName: $(System.JobName) config, build, and install
 
-      - powershell: .\install\ruby.exe azure_install_info.rb
+      - powershell: |
+          $env:path = "$env:BUILD_SOURCESDIRECTORY\install\bin;$env:path"
+          ruby.exe azure_install_info.rb
         continueOnError: true
         displayName: $(System.JobName) install info
         
