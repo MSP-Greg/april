@@ -25,6 +25,10 @@ jobs:
         failOnStderr: false
         displayName: $(System.JobName) config, build, and install
 
+      - powershell: .\install\ruby.exe azure_install_info.rb
+        continueOnError: true
+        displayName: $(System.JobName) install info
+        
       - powershell: $env:path = ./2_0_test.ps1
         failOnStderr: false
         continueOnError: true
