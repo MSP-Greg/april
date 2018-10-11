@@ -194,7 +194,7 @@ function MSpec {
   
   Run-Proc `
     -exe    $ruby_exe `
-    -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -V -f f -T `"--disable=gems`"" `
+    -e_args "--disable=gems -rdevkit ../mspec/bin/mspec -V -f s -T `"--disable=gems`" library/win32ole" `
     -StdOut "test_mspec.log" `
     -StdErr "test_mspec_err.log" `
     -Title  "test-mspec" `
