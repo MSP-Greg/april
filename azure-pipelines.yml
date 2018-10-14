@@ -43,5 +43,5 @@ jobs:
         displayName: Publish logs
         continueOnError: true
         inputs:
-          pathtoPublish: $(Build.SourcesDirectory)/logs
+          pathtoPublish: $(Build.SourcesDirectory)\logs
           artifactName: mingw-logs

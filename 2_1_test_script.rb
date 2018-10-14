@@ -33,9 +33,10 @@ module TestScript
     R_BRANCH = branch[/[^\/]+\Z/].strip
   }
 
-  IS_AV  = /true/i =~ ENV['APPVEYOR']                  # Appveyor build vs local
-
-  DASH = case ENV['PS_ENC']
+  IS_AV = /true/i =~ ENV['APPVEYOR']        # Appveyor build vs local
+  IS_AP = ENV.key? 'AZURE_HTTP_USER_AGENT'  # Azure pipeline build
+  
+  DASH = IS_AP ? '-' : case ENV['PS_ENC']
     when 'utf-8'
       "\u2015".dup.force_encoding 'utf-8'
     when 'Windows-1252'
@@ -45,9 +46,15 @@ module TestScript
     else
       "\u2015".dup.force_encoding 'utf-8'
     end
+  
+  if IS_AP
+    YELLOW = ""
+    RESET  = ""
+  else
+    YELLOW = "\e[33m"
+    RESET  = "\e[0m"
+  end
 
-  YELLOW = "\e[33m"
-  RESET  = "\e[0m"
   STRIPE_LEN = 55
   PUTS_LEN   = 74
   @@failures = 0
