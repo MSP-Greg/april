@@ -32,7 +32,7 @@ jobs:
         continueOnError: true
         displayName: $(System.JobName) install info
         
-      - powershell: $env:path = ./2_0_test.ps1
+      - powershell: ./2_0_test.ps1
         failOnStderr: false
         continueOnError: true
         displayName: $(System.JobName) test

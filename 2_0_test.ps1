@@ -228,7 +228,7 @@ sleep 2
 BootStrapTest
 sleep 2
 Test-All
-#sleep 5
+sleep 5
 MSpec
 
 ren "$d_install/lib/ruby/site_ruby/readline.rb_" "readline.rb"
