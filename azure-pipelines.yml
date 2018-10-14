@@ -9,6 +9,9 @@ jobs:
         x64-mingw32:
           platform: x64
     steps:
+      - powershell: git config --global core.autocrlf false
+        displayName: $(System.JobName) git config core.autocrlf
+
       - checkout: self
         fetchDepth: 10
 
@@ -16,7 +19,6 @@ jobs:
         displayName: $(System.JobName) install prerequisites
 
       - powershell: |
-          git config --global core.autocrlf false
           git clone -q --depth=5 --no-tags --branch=master https://github.com/oneclick/rubyinstaller2.git    ./rubyinstaller2
           git clone -q --depth=5 --no-tags --branch=master https://github.com/ConnorAtherton/rb-readline.git ./ruby_readline
           git clone -q --depth=5 --no-tags --branch=trunk  https://github.com/ruby/ruby.git                  ./ruby
