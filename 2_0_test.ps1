@@ -157,11 +157,7 @@ function BootStrapTest {
 
 #—————————————————————————————————————————————————————————————————————— Test-All
 function Test-All {
-  # Standard Ruby CI doesn't run this test, remove for better comparison
-  # $remove_test = "$d_ruby/test/ruby/enc/test_case_comprehensive.rb"
-  # if (Test-Path -Path $remove_test -PathType Leaf) { Remove-Item -Path $remove_test }
-
-  # copy items from build folder that are needed for test-all
+  # copy -test- items from build folder that are needed for test-all
   $ruby_so = "$d_install/lib/ruby/$abi/$rarch"
   Copy-Item "$d_build/.ext/x64-mingw32/-test-" $ruby_so -Recurse
   New-Item  -Path "$ruby_so/-test-/win32/dln" -ItemType Directory 1> $null
