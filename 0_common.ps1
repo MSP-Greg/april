@@ -35,6 +35,7 @@ function Set-Variables {
     $script:d_git     =  "$env:ProgramFiles/Git"
     $script:7z        =  "D:/7zip/7z.exe"
     $env:TMPDIR       =  [System.IO.Path]::GetFullPath("$env:BUILD_SOURCESDIRECTORY\..\temp").replace('\', '/')
+    $env:TMPDIR       =  ($env:TEMP).replace('\', '/')
     $script:base_path = ("D:/7zip;$d_git/cmd;" + `
       "$env:SystemRoot/system32;$env:SystemRoot;$env:SystemRoot\System32\wbem").replace('\', '/')
   } else {
